@@ -16,8 +16,8 @@ Page({
     openid: '',
 
     // 当前名词和动词数目
-    nounNum: 3,
-    verbNum: 2,
+    nounNum: 7418,
+    verbNum: 4334,
 
     //当前被编辑过的输入框
     editInputIndex: -1,
