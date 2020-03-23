@@ -7,7 +7,7 @@ Page({
     imagePaths: ['../../images/triger-red.png', '../../images/triger-blue.png', '../../images/triger-green.png'],
     chooseBarColor: { 'noun': 'white', 'mix': 'red'},
     // 选择的词汇类型 noun:全为名词， mix:出现的三个词中第二个为动词
-    curVocabType: 'noun',
+    curVocabType: 'mix',
     curVocabs: [],
     vocabColors: [],
     vocabBaseColors: ['#DC143C', '#FF1493', '#C71585', '#FF00FF', '#8B008B', '#9400D3', '#4B0082', '#7B68EE', '#483D8B', '#0000FF', '#191970', '#00008B',
@@ -58,9 +58,10 @@ Page({
       })
     }
     this.setData({
-      curVocabs: this.addVocabColor(['孙正义', '灵感', '创造'])
-      
-    })
+      curVocabs: this.addVocabColor(['', '', ''])
+    });
+    this.change();
+
   },
 
   onAdd: function () {
@@ -106,9 +107,15 @@ Page({
       success: res => {
         console.log('[数据库] [查询记录] 成功: ', res.data)
         var data = res.data
-        if (data.length == 0) {
+        if (data.length != 3) {
           console.log('query vocabs is null')
           return
+        }
+        // 返回顺序verb成了最后一个，需要调整
+        if (data[2]._id.indexOf("verb") >= 0){
+          var tmp = data[2].text;
+          data[2].text =  data[1].text;
+          data[1].text = tmp;
         }
         //确保有3个
         while (data.length < 3){

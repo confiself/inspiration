@@ -14,7 +14,7 @@
   
 }
 .choose-vocab-container{
-  margin-top: 10rpx;
+  margin-top: 50rpx;
   display: flex;
   justify-content: center;
 }
